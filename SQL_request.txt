@@ -1,11 +1,9 @@
 Задание 1: Выведи список логинов курьеров с количеством их заказов в статусе «В доставке» (поле inDelivery = true). 
 SELECT "Couriers"."login" AS "Courier_login",
-		SUM(CASE 
-				WHEN "Orders"."inDelivery" = true THEN 1 
-				ELSE 0 
-			END) AS "Orders_inDelivery" 
+		COUNT("Orders"."track") AS "Orders_inDelivery" 
 FROM "Couriers" AS "Couriers" 
-LEFT OUTER JOIN "Orders" AS "Orders" ON "Couriers"."id" = "Orders"."courierId" 
+JOIN "Orders" AS "Orders" ON "Couriers"."id" = "Orders"."courierId" 
+WHERE "Orders"."inDelivery" = true 
 GROUP BY "Couriers"."login";
 
 Задание 2: Выведи все трекеры заказов и их статусы. 
